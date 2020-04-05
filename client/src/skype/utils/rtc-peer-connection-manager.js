@@ -15,6 +15,18 @@ class RTCPeerConnectionManager {
     this.pc.addTrack(track, stream);
   }
 
+  replaceTrack(track) {
+    const sender = this.pc.getSenders().find((s) => {
+      return s.track.kind === track.kind;
+    });
+
+    sender.replaceTrack(track);
+  }
+
+  removeTracks() {
+    this.pc.getSenders().forEach((s) => this.pc.removeTrack(s));
+  }
+
   async createOfferAndSetLocalDescription() {
     const offer = await this.pc.createOffer();
     await this.pc.setLocalDescription(offer);

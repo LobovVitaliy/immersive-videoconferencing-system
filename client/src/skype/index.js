@@ -40,7 +40,7 @@ class Skype {
   async changeCamera(cameraId) {
     if (!!this.localStreamManager.getStream()) {
       this.localStreamManager.stopStream();
-      await this.startStream(cameraId);
+      await this.startStream(cameraId, this.pc.replaceTrack.bind(this.pc));
     }
   }
 
@@ -105,7 +105,7 @@ class Skype {
 
   async connect(type, cameraId) {
     try {
-      await this.startStream(cameraId);
+      await this.startStream(cameraId, this.pc.addTrack.bind(this.pc));
 
       await this.pc.createOfferAndSetLocalDescription();
 
@@ -118,7 +118,7 @@ class Skype {
     }
   }
 
-  async startStream(cameraId) {
+  async startStream(cameraId, callback) {
     const constraints = cameraId ? {
       video: {
         deviceId: {
@@ -140,7 +140,7 @@ class Skype {
       },
     });
 
-    this.localStreamManager.sendStream(this.pc.addTrack.bind(this.pc));
+    this.localStreamManager.sendStream(callback);
   }
 
   async accept(data) {
