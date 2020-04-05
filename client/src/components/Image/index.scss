@@ -1,0 +1,16 @@
+.image {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.image16to9wrapper {
+  position: relative;
+}
+
+.image16to9 {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

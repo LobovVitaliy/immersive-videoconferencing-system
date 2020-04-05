@@ -1,0 +1,35 @@
+@import '~normalize.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  // font-family: 'Orbitron';
+  font-size: 16px;
+}
+
+img {
+  vertical-align: middle;
+}
+
+input,
+button,
+textarea {
+  padding: 0;
+  border: none;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+:global {
+  .media-adaptive-wrapper {
+    padding-top: 56.25%;
+    position: relative;
+    z-index: -1;
+  }
+}

@@ -1,0 +1,36 @@
+.header {
+  max-height: 593px;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: 0 18%;
+  background: linear-gradient(
+    180deg, rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 31.25%,
+    rgba(0, 0, 0, 0.81) 57.81%,
+    #000000 100%
+  );
+}
+
+.title {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2a4b24;
+}

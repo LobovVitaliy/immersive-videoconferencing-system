@@ -1,0 +1,25 @@
+.prism {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+}
+
+.block {
+  display: flex;
+}
+
+.video2 {
+  margin-right: 50%;
+  margin-left: -25%;
+  transform: rotate(-90deg);
+}
+
+.video3 {
+  transform: rotate(+90deg);
+}
+
+.video4 {
+  transform: rotate(180deg);
+}

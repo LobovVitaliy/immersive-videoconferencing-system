@@ -1,0 +1,37 @@
+.rc-slider {
+  position: relative;
+  padding: 0 5px;
+  width: 18px;
+  touch-action: none;
+}
+
+.rc-slider-rail {
+  position: absolute;
+  height: 100%;
+  width: 8px;
+  background-color: #f0f294;
+  border: 2px solid #000000;
+}
+
+.rc-slider-track,
+.rc-slider-step,
+.rc-slider-mark {
+  display: none;
+}
+
+.rc-slider-handle {
+  position: absolute;
+  margin-left: -5px;
+  width: 18px;
+  height: 24px;
+  border: solid 2px #000000;
+  background-color: #f0f294;
+  outline: none;
+  touch-action: pan-y;
+  cursor: pointer;
+  cursor: grab;
+}
+
+.rc-slider-handle:active {
+  cursor: grabbing;
+}

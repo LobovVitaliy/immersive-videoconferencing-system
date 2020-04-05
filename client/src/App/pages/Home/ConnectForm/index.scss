@@ -1,0 +1,34 @@
+.form {
+  padding: 0 16px;
+  width: 100%;
+  max-width: 355px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+  font-weight: 400;
+  font-size: 48px;
+  color: #babd2f;
+}
+
+.input {
+  margin-top: 40px;
+  padding: 14px 24px;
+  font-size: 24px;
+  color: #595656;
+}
+
+.button {
+  margin-top: 40px;
+  height: 55px;
+  font-weight: 900;
+  font-size: 38px;
+  color: #ffffff;
+  cursor: pointer;
+
+  background: linear-gradient(
+    180deg, #babd2f 0%, #949726 100%
+  );
+}
