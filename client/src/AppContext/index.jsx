@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const AppContext = React.createContext();
 
 function AppProvider({ children }) {
-  const [address, setAddress] = useState('localhost:8081');
+  const [address, setAddress] = useState('');
 
   const [options, setOptions] = useState({
     color: '#000000',
