@@ -5,7 +5,6 @@ import StreamManager from './utils/stream-manager';
 class Skype {
   constructor(url, listener) {
     this.ws = new WebSocketManager(url, this.handle.bind(this));
-    this.pc = new RTCPeerConnectionManager();
 
     this.localStreamManager = new StreamManager();
     this.remoteStreamManager = new StreamManager();
@@ -13,26 +12,19 @@ class Skype {
     this.state = {};
 
     this.notify = listener;
-
-    this.pc.addEventListener('track', (event) => {
-      this.remoteStreamManager.setStream(event.streams[0]);
-
-      this.notify({
-        type: SKYPE_EVENTS.SET_REMOTE_STREAM,
-        data: {
-          stream: event.streams[0],
-        },
-      });
-    });
   }
 
   // public
 
   async call(cameraId) {
+    this.initRTCPeerConnection();
+
     await this.connect('offer-request', cameraId);
   }
 
   async reply(cameraId) {
+    this.initRTCPeerConnection();
+
     await this.accept(this.state.request.data);
     await this.connect('offer-response', cameraId);
   }
@@ -45,13 +37,7 @@ class Skype {
   }
 
   stop() {
-    this.notify({
-      type: SKYPE_EVENTS.STOPPED,
-      data: {},
-    });
-
-    this.localStreamManager.stopStream();
-    this.remoteStreamManager.stopStream();
+    this.stopCall();
 
     this.ws.send({ type: 'stop' });
   }
@@ -59,7 +45,6 @@ class Skype {
   close() {
     try {
       this.ws.close();
-      this.pc.close();
     } catch (e) {
       console.error(e);
     }
@@ -88,19 +73,27 @@ class Skype {
         break;
 
       case 'stop':
-        this.notify({
-          type: SKYPE_EVENTS.STOPPED,
-          data: {},
-        });
-
-        this.localStreamManager.stopStream();
-        this.remoteStreamManager.stopStream();
-
+        this.stopCall();
         break;
 
       default:
         console.error('Raw data type:', type);
     }
+  }
+
+  initRTCPeerConnection() {
+    this.pc = new RTCPeerConnectionManager();
+
+    this.pc.addEventListener('track', (event) => {
+      this.remoteStreamManager.setStream(event.streams[0]);
+
+      this.notify({
+        type: SKYPE_EVENTS.SET_REMOTE_STREAM,
+        data: {
+          stream: event.streams[0],
+        },
+      });
+    });
   }
 
   async connect(type, cameraId) {
@@ -155,6 +148,18 @@ class Skype {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  stopCall() {
+    this.notify({
+      type: SKYPE_EVENTS.STOPPED,
+      data: {},
+    });
+
+    this.localStreamManager.stopStream();
+    this.remoteStreamManager.stopStream();
+
+    this.pc.close();
   }
 }
 
