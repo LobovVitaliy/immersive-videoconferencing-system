@@ -97,9 +97,9 @@ initRTCPeerConnection() {
 
     this.notify({
       type: SKYPE_EVENTS.SET_REMOTE_STREAM,
-        data: {
-          stream: event.streams[0],
-        },
+      data: {
+        stream: event.streams[0],
+      },
     });
   });
 }
